@@ -1,23 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './containers/App';
+import configureStore from './store/configureStore';
 import './index.css';
-import reducer from './reducers/tiles';
-import AppContainer from './components/js/AppContainer';
-import registerServiceWorker from './registerServiceWorker';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 
+const store = configureStore();
 
-
-const store = createStore(reducer, applyMiddleware(thunk));
-
-console.log(store.getState());
-
-ReactDOM.render(
+render(
     <Provider store={store}>
-        <AppContainer /*tiles={store.getState().tiles}*/ />
-    </Provider>, 
-    document.getElementById('root')
-);
-registerServiceWorker();
+        <App />
+    </Provider>,
+    document.getElementById('root') 
+)
